@@ -33,13 +33,13 @@ const typography = {
     fontWeight: 700,
     lineHeight: 64 / 48,
     fontSize: pxToRem(72),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 })
+    ...responsiveFontSizes({ sm: 40, md: 44, lg: 72 })
   },
   h3: {
     fontWeight: 700,
     lineHeight: 1.5,
-    fontSize: pxToRem(48),
-    ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 })
+    fontSize: pxToRem(64),
+    ...responsiveFontSizes({ sm: 26, md: 30, lg: 64 })
   },
   h4: {
     fontWeight: 700,

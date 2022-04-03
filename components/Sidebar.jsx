@@ -1,7 +1,7 @@
 import {ListItem} from '@mui/material';
 import Box from '@mui/material/Box';
-import React from 'react';
-import {SIDEBAR_ITEMS} from '../constants';
+import React, {useCallback} from 'react';
+import {SECTION_INDEX_MAP, SIDEBAR_ITEMS} from '../constants';
 import {useSidebarState} from './Sidebar.context';
 
 const menuItems = [
@@ -24,11 +24,17 @@ const menuItems = [
 ]
 
 const SideBarItem = ({name, children, current}) => {
+	const {parallaxRef, onDisplay} = useSidebarState();
+
+	const onClickItem = useCallback(() => {
+		parallaxRef.current && parallaxRef.current.scrollTo(SECTION_INDEX_MAP[name])
+	}, [name, onDisplay])
+
 	return (
 		<ListItem
-			component='a'
-			href={`#${name}`}
+			onClick={onClickItem}
 			sx={{
+				cursor: 'pointer',
 				fontWeight: current ? 700: 400,
 				padding: theme => theme.spacing(3, 0),
 				color: '#ffffff'

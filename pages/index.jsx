@@ -6,58 +6,56 @@ import {styled} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import {Parallax, ParallaxLayer} from '@react-spring/parallax';
 import Image from 'next/image';
-import React from 'react';
+import React, {Fragment} from 'react';
+import {Anchor} from '../components';
+import {ParallaxController} from '../components/ParallaxController';
+import {RefProvider} from '../components/Ref.context';
+import {useSidebarState} from '../components/Sidebar.context';
+import {SIDEBAR_ITEMS} from '../constants';
+import {
+	chartContent,
+	genzContent,
+	genzStatistic,
+	insightContent,
+	overviewContent,
+	overviewSlides,
+	reasonToChoose
+} from '../data';
 
 const StyledTypography = styled(Typography)(() => ({
 	lineHeight: 2.4
 }));
 
+const FullHeightBox = styled(Box)(() => ({
+	height: '100%'
+}));
 
-export const overviewItems = [
-	{
-		key: 'item-1',
-		content: 'In the 10 years, Clear Men has successfully educated & recruited 15% Vietnamese Men, 25-45 to use Clear Men by:',
-	},
-	{
-		key: 'item-2',
-		content: <><b>Functional offer:</b> Overcoming all the scalp’s challenges.</>
-	},
-	{
-		key: 'item-3',
-		content: <><b>Emotional offer:</b> Overcoming and beating no matter what challenges the world throws at him.</>,
-	},
-	{
-		key: 'item-4',
-		content:
-			'We also engaged with Men by activating around their passion points, from the king of sports - Football to the emerging ESport - Gaming.'
-	},
-]
+const Content = ({data, spacing = 3}) => {
+	const {title, items} = data;
 
-const overviewSlides = [
-	{
-		key: 'bottle',
-		name: 'Clear Men Bottle',
-		src: '/clear-men-bottle.png'
-	},
-	{
-		key: 'ronaldo',
-		name: 'Clear Men Ronaldo',
-		src: '/clear-ronaldo.png'
-	},
-	{
-		key: 'unbeatable',
-		name: 'Clear Men Unbeatable',
-		src: '/clear-unbeatable.png'
-	},
-]
+	return (
+		<Stack direction="column" spacing={spacing}>
+			<Typography variant="h4">
+				{title}
+			</Typography>
+			{items.map(({key, content}) => (
+				<StyledTypography key={key} variant="body1">
+					{content}
+				</StyledTypography>
+			))}
+		</Stack>
+	)
+}
 
 const Home = () => {
+	const {parallaxRef} = useSidebarState();
+
 	return (
 		<Box
 			component="main"
 			sx={{minHeight: '100vh'}}
 		>
-			<Parallax pages={5}>
+			<Parallax pages={20} ref={parallaxRef}>
 				<ParallaxLayer sticky={{start: 0, end: 2}}>
 					<Grid
 						container
@@ -66,21 +64,12 @@ const Home = () => {
 						sx={{height: '100%'}}
 					>
 						<Grid item xs={6}>
-							<Stack direction="column" spacing={3}>
-								<Typography variant="h4">
-									OVERVIEW
-								</Typography>
-								{overviewItems.map(({key, content}) => (
-									<StyledTypography key={key} variant="body1">
-										{content}
-									</StyledTypography>
-								))}
-							</Stack>
+							<Content data={overviewContent} />
 						</Grid>
 					</Grid>
 				</ParallaxLayer>
-				{overviewSlides.map(({src, alt}, index) => (
-					<ParallaxLayer offset={(index)} speed={0.2}>
+				{overviewSlides.map(({src, key, alt}, index) => (
+					<ParallaxLayer key={key} offset={(index)} speed={0.2}>
 						<Grid
 							container
 							component={Container}
@@ -89,9 +78,8 @@ const Home = () => {
 							sx={{height: '100%'}}
 						>
 							<Grid item xs={6} sx={{height: theme => theme.spacing(70)}}>
-								<Box sx={{
+								<FullHeightBox sx={{
 									width: '100%',
-									height: '100%',
 									position: 'relative'
 								}}>
 									<Image
@@ -100,15 +88,14 @@ const Home = () => {
 										layout="fill"
 										objectFit='cover'
 									/>
-								</Box>
+								</FullHeightBox>
 							</Grid>
 						</Grid>
 					</ParallaxLayer>
 				))}
 				<ParallaxLayer offset={3} speed={0.1}>
-					<Box sx={{
+					<FullHeightBox sx={{
 						backgroundImage: 'url("objective-bg.png")',
-						height: '100%',
 						backgroundSize: 'cover',
 					}} />
 				</ParallaxLayer>
@@ -116,6 +103,367 @@ const Home = () => {
 					<Typography variant="h2" textAlign="center">
 						OBJECTIVE
 					</Typography>
+				</ParallaxLayer>
+				<ParallaxLayer offset={4} speed={1}>
+					<FullHeightBox
+						display="flex"
+						justifyContent="center"
+						alignItems="center"
+						position="relative"
+					>
+						<Image
+							width={640}
+							height={640}
+							objectFit="cover"
+							src="/target-audience.png"
+							alt="Section background"
+							style={{opacity: '60%'}}
+						/>
+					</FullHeightBox>
+				</ParallaxLayer>
+				<ParallaxLayer offset={4.4} speed={0.2}>
+					<Typography variant="h2" textAlign="center">
+						TARGET AUDIENCE
+					</Typography>
+				</ParallaxLayer>
+				<ParallaxLayer offset={5} speed={0.2}>
+					<FullHeightBox component={Container}>
+						<FullHeightBox
+							display="flex"
+							justifyContent="center"
+							flexDirection="column"
+							sx={{height: '100%'}}
+						>
+							<Grid container>
+								<Grid
+									item
+									xs={3}
+									mb={2}
+									sx={{height: theme => theme.spacing(25)}}
+									position="relative"
+								>
+									<Image
+										layout="fill"
+										src="/genz-1.png"
+										alt="GenZ Illustration"
+									/>
+								</Grid>
+							</Grid>
+							<Grid container>
+								<Grid item xs={2} />
+								<Grid
+									item
+									xs={3}
+									mb={2}
+									sx={{height: theme => theme.spacing(25)}}
+									position="relative"
+								>
+									<Image
+										layout="fill"
+										src="/genz-2.png"
+										alt="GenZ Illustration"
+									/>
+								</Grid>
+							</Grid>
+							<Grid container>
+								<Grid item xs={1} />
+								<Grid
+									item
+									xs={3}
+									mb={2}
+									sx={{height: theme => theme.spacing(25)}}
+									position="relative"
+								>
+									<Image
+										layout="fill"
+										src="/genz-3.png"
+										alt="GenZ Illustration"
+									/>
+								</Grid>
+							</Grid>
+						</FullHeightBox>
+					</FullHeightBox>
+				</ParallaxLayer>
+				<ParallaxLayer offset={5} speed={0.1}>
+					<Grid
+						container
+						component={Container}
+						justifyContent="flex-end"
+						alignItems="center"
+						sx={{height: '100%'}}
+					>
+						<Grid item xs={6}>
+							<Content data={genzContent} />
+						</Grid>
+					</Grid>
+				</ParallaxLayer>
+				<ParallaxLayer offset={6} speed={-0.2}>
+					<Grid
+						container
+						component={Container}
+						alignItems="center"
+						sx={{height: '100%'}}
+					>
+						<Grid item xs={6}>
+							<Content data={reasonToChoose} />
+						</Grid>
+					</Grid>
+				</ParallaxLayer>
+				<ParallaxLayer offset={6} speed={0.2}>
+					<FullHeightBox component={Container}>
+						<FullHeightBox
+							display="flex"
+							justifyContent="center"
+							flexDirection="column"
+							sx={{height: '100%'}}
+						>
+							<Grid container justifyContent="flex-end">
+								<Grid
+									item
+									xs={3}
+									mb={2}
+									sx={{height: theme => theme.spacing(25)}}
+									position="relative"
+								>
+									<Image
+										layout="fill"
+										src="/social-media-1.png"
+										alt="Social media illustration"
+									/>
+								</Grid>
+							</Grid>
+							<Grid container justifyContent="flex-end">
+								<Grid
+									item
+									xs={3}
+									mb={2}
+									sx={{height: theme => theme.spacing(25)}}
+									position="relative"
+								>
+									<Image
+										layout="fill"
+										src="/social-media-2.png"
+										alt="Social media illustration"
+									/>
+								</Grid>
+								<Grid item xs={2} />
+							</Grid>
+						</FullHeightBox>
+					</FullHeightBox>
+				</ParallaxLayer>
+				<ParallaxLayer offset={7} speed={0.3}>
+					<FullHeightBox component={Container}>
+						<Anchor name={SIDEBAR_ITEMS.Story} />
+						<Typography variant="h2" textAlign="center" my={6}>
+							THE CONTEXT
+						</Typography>
+						<Grid container spacing={3}>
+							{genzStatistic.map(({key, number, content}) => (
+								<Grid item key={key} xs={4}>
+									<Box sx={{
+										height: theme => theme.spacing(34),
+										position: 'relative',
+										backgroundColor: '#010413',
+										borderRadius: 1.5,
+										display: 'flex',
+										flexDirection: 'column',
+										textAlign: 'center',
+										padding: theme => theme.spacing(7, 3),
+										transition: 'all 0.2s ease-in-out',
+
+										'&:hover': {
+											transform: 'translateY(-4px)',
+										},
+
+										'&:after': {
+											position: 'absolute',
+											top: '-2px',
+											bottom: '-2px',
+											left: '-2px',
+											right: '-2px',
+											background: 'linear-gradient(60.64deg, #338FFF 0%, #D3FBD8 100%)',
+											content: "''",
+											zIndex: -1,
+											borderRadius: 1.5,
+										}
+									}}>
+										<Typography variant="h3" mb={2.5}>
+											{number}
+										</Typography>
+										<Typography>
+											{content}
+										</Typography>
+									</Box>
+								</Grid>
+							))}
+						</Grid>
+					</FullHeightBox>
+				</ParallaxLayer>
+				<ParallaxLayer offset={8} spead={0.2}>
+					<Container sx={{height: '100%'}}>
+						<Typography my={4} mb={6} variant="h4" textAlign="center">
+							OVERALL STATISTIC
+						</Typography>
+						<RefProvider>
+							{ref => (
+								<>
+									<Parallax ref={ref} pages={chartContent.length} horizontal>
+										{chartContent.map(({title, chart, description, speed}, index) => (
+											<ParallaxLayer key={title} offset={index} speed={speed} style={{width: '1200px'}}>
+												<Grid container spacing={8}>
+													<Grid item xs={7}>
+														{chart}
+													</Grid>
+													<Grid item xs={4}>
+														<Typography variant="h4" mb={3}>
+															{title}
+														</Typography>
+														<Typography>
+															{description}
+														</Typography>
+													</Grid>
+												</Grid>
+											</ParallaxLayer>
+										))}
+									</Parallax>
+									<ParallaxController pages={chartContent.length} />
+								</>
+							)}
+						</RefProvider>
+					</Container>
+				</ParallaxLayer>
+				<ParallaxLayer offset={9} speed={-0.2}>
+					<FullHeightBox sx={{
+						backgroundImage: `url("/dirt.gif")`,
+						backgroundSize: 'cover',
+					}}/>
+				</ParallaxLayer>
+				<ParallaxLayer offset={9.4} speed={-0.2}>
+					<Anchor name={SIDEBAR_ITEMS.Insight} />
+					<Typography variant="h2" textAlign="center">
+						INSIGHT
+					</Typography>
+				</ParallaxLayer>
+				{insightContent.map(({key, background, content, speed}, index) => {
+					const contentIndex = index + 10;
+					return (
+						<Fragment key={key}>
+							<ParallaxLayer offset={contentIndex}>
+								<FullHeightBox sx={{
+									backgroundImage: `url("${background}")`,
+									backgroundSize: 'cover',
+									zIndex: -1,
+									position: 'relative',
+									top: 0,
+									lefT: 0,
+									width: '100%',
+									height: '100%',
+								}}>
+									<FullHeightBox sx={{
+										backgroundColor: '#333333',
+										opacity: 0.4,
+									}}/>
+								</FullHeightBox>
+
+							</ParallaxLayer>
+							<ParallaxLayer offset={contentIndex + 0.5} speed={speed}>
+								<Container>
+									{(index === insightContent.length - 1) && (
+										<Anchor name={SIDEBAR_ITEMS.Insight} />
+									)}
+									<Typography
+										variant="h4"
+										textAlign="center"
+										zIndex={5}
+										lineHeight={1.75}
+										fontWeight={400}
+										sx={{transform: 'translateY(-50%)'}}
+									>
+										{content}
+									</Typography>
+								</Container>
+							</ParallaxLayer>
+						</Fragment>
+					)
+				})}
+				<ParallaxLayer offset={13.4} speed={0.2}>
+					<Anchor name={SIDEBAR_ITEMS.BigIdea} />
+					<Typography variant="h2" textAlign="center">
+						BIG IDEA
+					</Typography>
+				</ParallaxLayer>
+				<ParallaxLayer offset={14} speed={0.2}>
+					<FullHeightBox component={Container}>
+						<FullHeightBox container component={Grid}>
+							<Grid item xs={8} sx={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+							}}>
+								<Box
+									sx={{height: theme => theme.spacing(70)}}
+									position="relative"
+								>
+									<Image
+										layout="fill"
+										alt="Section illustrator"
+										src="/successfully.png"
+										objectFit="cover"
+									/>
+								</Box>
+							</Grid>
+						</FullHeightBox>
+					</FullHeightBox>
+				</ParallaxLayer>
+				<ParallaxLayer offset={14.5} speed={0.4}>
+					<Container>
+						<Grid container justifyContent="flex-end">
+							<Grid item xs={8}>
+								<Typography>
+									There is a perception that successful people are messy, while melodious people don't have time to focus on work.
+									However, Gen Z always wants to be a dynamic, ambitious but always elegant young person.
+								</Typography>
+							</Grid>
+						</Grid>
+					</Container>
+				</ParallaxLayer>
+				<ParallaxLayer offset={15} speed={-0.1}>
+					<Container>
+						<Grid container justifyContent="center">
+							<Grid item xs={6}>
+								<Image
+									width={552}
+									height={552}
+									alt="Section illustrator"
+									src="/creative.svg"
+									objectFit="cover"
+								/>
+							</Grid>
+						</Grid>
+					</Container>
+				</ParallaxLayer>
+				<ParallaxLayer offset={15} speed={0.5}>
+					<FullHeightBox component={Container}>
+						<Grid
+							container
+							direction="column"
+							justifyContent="center"
+							rowGap={5}
+							alignItems="center"
+						>
+							<Grid item xs={6}>
+								<Typography>
+									To help young people always look elegant but still have time to do what they love,
+									we deliver this idea:
+								</Typography>
+							</Grid>
+							<Grid item xs={8}>
+								<Typography variant="h4" textAlign="center" fontWeight={400}>
+									“Keeping up with the hectic life or embracing yourself ? Why not both with Clear Men ?”
+								</Typography>
+							</Grid>
+						</Grid>
+					</FullHeightBox>
 				</ParallaxLayer>
 			</Parallax>
 		</Box>

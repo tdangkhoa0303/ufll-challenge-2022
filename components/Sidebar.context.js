@@ -1,10 +1,10 @@
-import {noop} from 'lodash/util';
-import {createContext, useContext} from 'react';
+import {createContext, createRef, useContext} from 'react';
 import {SIDEBAR_ITEMS} from '../constants';
 
 const SidebarContext = createContext({
 	item: SIDEBAR_ITEMS.Story,
-	onDisplay: noop,
+	onDisplay: (name) => {},
+	parallaxRef: createRef(),
 })
 
 export const useSidebarState = () => useContext(SidebarContext);

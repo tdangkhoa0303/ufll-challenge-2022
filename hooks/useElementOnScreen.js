@@ -7,9 +7,7 @@ export const useElementOnScreen = (options) => {
 	const onVisible = useCallback(
 		(entities) => {
 			const [entry] = entities;
-			if (visible !== entry.isIntersecting) {
-				setVisible(entry.isIntersecting);
-			}
+			setVisible(entry.isIntersecting);
 		},
 		[setVisible, visible],
 	);

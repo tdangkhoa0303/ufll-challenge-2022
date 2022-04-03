@@ -8,11 +8,13 @@ import {Parallax, ParallaxLayer} from '@react-spring/parallax';
 import Image from 'next/image';
 import React, {Fragment} from 'react';
 import {Anchor} from '../components';
+import {GradientCard} from '../components/GradientCard';
 import {ParallaxController} from '../components/ParallaxController';
 import {RefProvider} from '../components/Ref.context';
 import {useSidebarState} from '../components/Sidebar.context';
 import {SIDEBAR_ITEMS} from '../constants';
 import {
+	bigIdeaSteps,
 	chartContent,
 	genzContent,
 	genzStatistic,
@@ -29,6 +31,31 @@ const StyledTypography = styled(Typography)(() => ({
 const FullHeightBox = styled(Box)(() => ({
 	height: '100%'
 }));
+
+const StyledGradientCard = styled(GradientCard)({
+	justifyContent: 'center',
+
+	'& .title': {
+		opacity: 1,
+		transition: 'all 0.2s ease-in-out',
+	},
+	'& .content': {
+		opacity: 0,
+		display: 'none',
+		transition: 'all 0.2s ease-in-out',
+	},
+
+	'&:hover': {
+		'& .title': {
+			opacity: 0,
+			display: 'none',
+		},
+		'& .content': {
+			opacity: 1,
+			display: 'block',
+		}
+	}
+})
 
 const Content = ({data, spacing = 3}) => {
 	const {title, items} = data;
@@ -93,16 +120,36 @@ const Home = () => {
 						</Grid>
 					</ParallaxLayer>
 				))}
-				<ParallaxLayer offset={3} speed={0.1}>
-					<FullHeightBox sx={{
-						backgroundImage: 'url("objective-bg.png")',
-						backgroundSize: 'cover',
-					}} />
-				</ParallaxLayer>
-				<ParallaxLayer offset={3.5} speed={-0.2}>
-					<Typography variant="h2" textAlign="center">
-						OBJECTIVE
-					</Typography>
+				<ParallaxLayer offset={3} speed={-0.2}>
+					<FullHeightBox component={Container} display="flex" justifyContent="center" flexDirection="column">
+						<Typography variant="h3" my={6} textAlign="center">
+							OBJECTIVE
+						</Typography>
+						<Grid container spacing={4}>
+							<Grid item xs={6}>
+								<StyledGradientCard>
+									<Typography variant="h4" className="title">
+										EDUCATE
+									</Typography>
+									<Typography className="content">
+										Men that their scalp is biologically different from women's and needs a shampoo
+										catered especially for them in order to effectively fight against dandruff.
+									</Typography>
+								</StyledGradientCard>
+							</Grid>
+							<Grid item xs={6}>
+								<StyledGradientCard>
+									<Typography variant="h4" className="title">
+										RECRUIT
+									</Typography>
+									<Typography className="content">
+										50% of Vietnamese Gen Z, from 16+ Male, living in GT4 (Ha Noi, Ho Chi Minh, Da Nang, Can Tho),
+										currently using unisex or female shampoo, to use Clear Men to end their dandruff problem.
+									</Typography>
+								</StyledGradientCard>
+							</Grid>
+						</Grid>
+					</FullHeightBox>
 				</ParallaxLayer>
 				<ParallaxLayer offset={4} speed={1}>
 					<FullHeightBox
@@ -260,40 +307,14 @@ const Home = () => {
 						<Grid container spacing={3}>
 							{genzStatistic.map(({key, number, content}) => (
 								<Grid item key={key} xs={4}>
-									<Box sx={{
-										height: theme => theme.spacing(34),
-										position: 'relative',
-										backgroundColor: '#010413',
-										borderRadius: 1.5,
-										display: 'flex',
-										flexDirection: 'column',
-										textAlign: 'center',
-										padding: theme => theme.spacing(7, 3),
-										transition: 'all 0.2s ease-in-out',
-
-										'&:hover': {
-											transform: 'translateY(-4px)',
-										},
-
-										'&:after': {
-											position: 'absolute',
-											top: '-2px',
-											bottom: '-2px',
-											left: '-2px',
-											right: '-2px',
-											background: 'linear-gradient(60.64deg, #338FFF 0%, #D3FBD8 100%)',
-											content: "''",
-											zIndex: -1,
-											borderRadius: 1.5,
-										}
-									}}>
+									<GradientCard>
 										<Typography variant="h3" mb={2.5}>
 											{number}
 										</Typography>
 										<Typography>
 											{content}
 										</Typography>
-									</Box>
+									</GradientCard>
 								</Grid>
 							))}
 						</Grid>
@@ -386,11 +407,23 @@ const Home = () => {
 						</Fragment>
 					)
 				})}
-				<ParallaxLayer offset={13.4} speed={0.2}>
-					<Anchor name={SIDEBAR_ITEMS.BigIdea} />
-					<Typography variant="h2" textAlign="center">
-						BIG IDEA
-					</Typography>
+				<ParallaxLayer offset={13} speed={0.2}>
+					<FullHeightBox
+						display="flex"
+						justifyContent="center"
+						alignItems="center"
+						sx={{
+							backgroundImage: `url("/bg-gradient.svg")`,
+							backgroundSize: 'contain',
+							backgroundRepeat: 'no-repeat',
+							backgroundPosition: 'center center'
+					}}
+					>
+						<Anchor name={SIDEBAR_ITEMS.BigIdea} />
+						<Typography variant="h2" textAlign="center">
+							BIG IDEA
+						</Typography>
+					</FullHeightBox>
 				</ParallaxLayer>
 				<ParallaxLayer offset={14} speed={0.2}>
 					<FullHeightBox component={Container}>
@@ -465,6 +498,39 @@ const Home = () => {
 						</Grid>
 					</FullHeightBox>
 				</ParallaxLayer>
+				<ParallaxLayer sticky={{start: 16, end: 20}}>
+					<FullHeightBox component={Container}>
+						<Grid
+							container
+							justifyContent="flex-end"
+							alignItems="center"
+							sx={{height: '100%'}}
+						>
+							<Grid item xs={6} display="flex" justifyContent="flex-end">
+								<Image
+									width={552}
+									height={420}
+									alt="Section illustrator"
+									src="/tvc.png"
+									objectFit="cover"
+								/>
+							</Grid>
+						</Grid>
+					</FullHeightBox>
+				</ParallaxLayer>
+				{bigIdeaSteps.map(({key, content}, index) => (
+					<ParallaxLayer key={key} offset={16 + index + 0.4} speed={0.1}>
+						<FullHeightBox component={Container}>
+							<Grid container>
+								<Grid item xs={6}>
+									<Typography>
+										{content}
+									</Typography>
+								</Grid>
+							</Grid>
+						</FullHeightBox>
+					</ParallaxLayer>
+				))}
 			</Parallax>
 		</Box>
 	)

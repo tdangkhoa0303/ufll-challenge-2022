@@ -158,3 +158,30 @@ export const chartContent = [
 		speed: -0.1
 	}
 ]
+
+export const bigIdeaSteps = [
+	{
+		key: 'step1',
+		content: 'We will promote the convenience and fastness of Clear Men 3 in 1 through a TVC:',
+	},
+	{
+		key: 'step2',
+		content: 'They often have to stay up at night to work and often get up late every morning. ' +
+			'Therefore, they do not have much time to thoroughly care themselves with many steps, leading to greasy hair and dandruff. ' +
+			'So, they lack confidence when meeting friends, colleagues and present in front of a crowd. ' +
+			'Their ability is not shown and not appreciated, they can not win scholarships and be promoted in work.',
+	},
+	{
+		key: 'step3',
+		content: 'Since knowing Clear Men 3 in 1, instead of using many steps, they only need 2 bumps of Clear Men 3 in 1 to care for both hair and body. ' +
+			'It only takes them 7 minutes to shower and be on time to go to school and work but still ensure refreshing and elegant look.',
+	},
+	{
+		key: 'step4',
+		content: 'Since using Clear Men 3 in 1, they have been more confident and have been able to do many things they love get what they want.',
+	},
+	{
+		key: 'step5',
+		content: 'Finally, will show the saying “Keeping up with the hectic life or embracing yourself ? Why not both with Clear Men?”',
+	},
+]

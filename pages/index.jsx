@@ -592,7 +592,7 @@ const Home = () => {
 							<FullHeightBox component={Container}>
 								<Grid container>
 									<Grid item xs={6}>
-										<Typography>
+										<Typography lineHeight={2}>
 											{content}
 										</Typography>
 									</Grid>
@@ -654,11 +654,11 @@ const Home = () => {
 							</Grid>
 						</FullHeightBox>
 					</ParallaxLayer>
-					<ParallaxLayer offset={24} speed={0.2}>
+					<ParallaxLayer offset={24.2} speed={0.2}>
 						<FullHeightBox component={Container}>
 							<Grid container justifyContent="flex-end" mt={4}>
 								<Grid item xs={8}>
-									<Stack spacing={6}>
+									<Stack spacing={4}>
 										<Stack spacing={2}>
 											<Typography variant="h6" fontWeight={700}>
 												MEASUREMENT

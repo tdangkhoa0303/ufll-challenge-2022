@@ -37,7 +37,7 @@ export default () => {
 					Professional articles on the use of female shampoos are not suitable for men's scalp, may causing itchy dandruff.
 				</StyledTypography>
 				<StyledTypography>
-					Reviews from reputable doctor channels like Dr Hiếu Aesthestic, Anh Bác Sĩ,...
+					Reviews from reputable doctor channels like Dr Hiếu Aesthetic, Anh Bác Sĩ,...
 				</StyledTypography>
 				<FullWidthImage
 					src="/anh-bac-si.png"

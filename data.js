@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 import {HairProblemChart} from './components';
 import {MenFreeTimeActivity} from './components/MenFreeTimeActivity';
@@ -166,15 +168,18 @@ export const bigIdeaSteps = [
 	},
 	{
 		key: 'step2',
-		content: 'The central film describes life of gen Z: a student at university and a hard-working fresher at a big MNC. They often have to stay up at night to work and often get up late every morning. ' +
-			'Therefore, they do not have much time to thoroughly care themselves with many steps, leading to greasy hair and dandruff. ' +
-			'So, they lack confidence when meeting friends, colleagues and present in front of a crowd. ' +
-			'Their ability is not shown and not appreciated, they can not win scholarships and be promoted in work.',
+		content:
+			<>
+				The central film describes life of gen Z: <b>a student at university</b> and <b>a hard-working fresher</b> at a big MNC. They often have to <b>stay up at night</b> to work and <b>often get up late</b> every morning.<br/>
+				<Box component="span" mb={2} />
+				Therefore, they <b>do not have much time to thoroughly care themselves</b> with many steps, leading to <b>greasy hair and dandruff</b>. So, they lack confidence when meeting friends, colleagues and present in front of a crowd. <b>Their ability is not shown and appreciated</b>, they can not win scholarships and be promoted in work.
+			</>
 	},
 	{
 		key: 'step3',
-		content: 'Since knowing Clear Men 3 in 1, instead of using many steps, they only need 2 bumps of Clear Men 3 in 1 to care for both hair and body. ' +
-			'It only takes them 7 minutes to shower and be on time to go to school and work but still ensure refreshing and elegant look.',
+		content:
+			<>Since knowing Clear Men 3 in 1, instead of using many steps, they <b>only need 2 bumps of Clear Men 3 in 1</b> to care for both hair and body.
+				It only takes them <b>7 minutes to shower</b> and be on time to go to school and work but still ensure refreshing and elegant look.</>,
 	},
 	{
 		key: 'step4',
@@ -182,7 +187,8 @@ export const bigIdeaSteps = [
 	},
 	{
 		key: 'step5',
-		content: 'Finally, will show the saying “Keeping up with the hectic life or embracing yourself ? Why not both with Clear Men?”',
+		content:
+			<>Finally, will show the saying <b>“Keeping up with the hectic life or embracing yourself? Why not both with Clear Men?”</b></>,
 	},
 ];
 

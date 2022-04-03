@@ -4,7 +4,7 @@ import {FullWidthImage, PageLayout, StyledTypography} from '../../components/Pag
 
 export default () => {
 	return (
-		<PageLayout title="Use refill packaging with different compliment/ motivation quotes">
+		<PageLayout title="Spreading">
 			<Grid item xs={8}>
 				<StyledTypography variant="h4" mb={2}>
 					Objective:

@@ -17,7 +17,6 @@ export const Layout = ({children}) => {
 		}}>
 			<Box sx={{backgroundColor: '#010413', minHeight: '100vh'}}>
 				<Appbar />
-				<Sidebar />
 				{children}
 			</Box>
 		</SidebarContextProvider>

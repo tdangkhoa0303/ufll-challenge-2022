@@ -31,7 +31,7 @@ export const genzContent = {
 	items: [
 		{
 			key: 'item-1',
-			content: 'Gen Z who have income ≥ 2,4 million/month',
+			content: 'Gen Z who have income greater than 2,4 million VNĐ/month',
 		},
 		{
 			key: 'item-2',
@@ -166,7 +166,7 @@ export const bigIdeaSteps = [
 	},
 	{
 		key: 'step2',
-		content: 'They often have to stay up at night to work and often get up late every morning. ' +
+		content: 'The central film describes life of gen Z: a student at university and a hard-working fresher at a big MNC. They often have to stay up at night to work and often get up late every morning. ' +
 			'Therefore, they do not have much time to thoroughly care themselves with many steps, leading to greasy hair and dandruff. ' +
 			'So, they lack confidence when meeting friends, colleagues and present in front of a crowd. ' +
 			'Their ability is not shown and not appreciated, they can not win scholarships and be promoted in work.',
@@ -184,4 +184,40 @@ export const bigIdeaSteps = [
 		key: 'step5',
 		content: 'Finally, will show the saying “Keeping up with the hectic life or embracing yourself ? Why not both with Clear Men?”',
 	},
+];
+
+export const shortPlans = [
+	{
+		key: 'shortplan-1',
+		name: 'Educate “Men use Shampoo for Men”',
+		slug: 'men-use-shampoo-for-men',
+	},
+	{
+		key: 'shortplan-2',
+		name: 'Campaign “Clear Men\'s makeover” - “Lột xác cùng Clear Men”',
+		slug: 'clear-men-makeover',
+	},
+	{
+		key: 'shortplan-3',
+		name: 'Spreading',
+		slug: 'spreading',
+	}
+]
+
+export const longPlans = [
+	{
+		key: 'longplan-1',
+		name: 'Use refill packaging with different compliment - motivation quotes',
+		slug: 'refill-package-motivation-quotes',
+	},
+	{
+		key: 'longplan-2',
+		name: 'Recalling empty refill bags',
+		slug: 'recalling-empty-refill-bags',
+	},
+	{
+		key: 'longplan-3',
+		name: 'Make it easy and convenient to shop online',
+		slug: 'make-it-convenient',
+	}
 ]
